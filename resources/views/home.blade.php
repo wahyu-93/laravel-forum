@@ -73,10 +73,13 @@
                 <div class="col-12 col-lg-6">
                    <h1>Welcome to <br>BeeProject Forum</h1>
                     <p class="mb-4">
-                       Empowering Developers to Build and Grow with Laravel
+                       Empowering Developers to Build and Grow with Us
                     </p>
-                    <a href="#" class="btn btn-primary me-2 mb-2 mb-lg-0">Sign Up</a>
-                    <a href="#" class="btn btn-secondary mb-2 mb-lg-0">Join Discussions</a>
+
+                    <div class="text-center text-lg-start">
+                        <a href="#" class="btn btn-primary me-2 mb-2 mb-lg-0">Sign Up</a>
+                        <a href="#" class="btn btn-secondary mb-2 mb-lg-0">Join Discussions</a>
+                    </div>
                 </div>
                 <div class="col-12 col-lg-6 h-315px order-first order-lg-last mb-3 mb-lg-0">
                     <img class="hero-image float-lg-end" src="{{ url('assets/images/hero2.png') }}" alt="">
@@ -229,5 +232,60 @@
                 </div>
             </div>
         </section>
+
+        {{-- CTA section --}}
+        <section class="container min-h-372px d-flex flex-column align-items-center justify-content-center">
+            <h2>Ready to contribute?</h2>
+
+            <p class="mb-4">want to make a big impact</p>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-primary me-2 mb-2 mb-lg-0">Sign Up</a>
+                <a href="#" class="btn btn-secondary mb-2 mb-lg-0">Join Discussions</a>
+            </div>
+        </section>
+
+        {{-- footer section --}}
+        <footer class="py-80px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                        <img class="h-48px" src="{{ asset('assets/images/logo3.png') }}" alt="Logo">
+                        <p class="text-white">Empowering Developers to Build and Grow with Us</p>
+                    </div>
+
+                    <div class="col-12 col-lg-6 me-auto">
+                        <div class="d-flex flex-column flex-lg-row justify-content-center">
+                            <div class="d-flex flex-column me-140px mb-3 mb-lg-0">
+                                <p class="fw-bold fs-5 text-white text-nowrap">Contact Us</p>
+                                <ul class="list-unstyled">
+                                    <li class="text-white">
+                                        <a href="">wahyu@gmail.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="d-flex flex-column">
+                                <p class="fw-bold fs-5 text-white text-nowrap">Links</p>
+                                <ul class="list-unstyled">
+                                    <li class="text-white mb-2">
+                                        <a href="">Home</a>
+                                    </li>
+
+                                    <li class="text-white mb-2">
+                                        <a href="">Discussions</a>
+                                    </li>
+
+                                    <li class="text-white mb-2">
+                                        <a href="">About US</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </footer>
+
     </body>
 </html>
