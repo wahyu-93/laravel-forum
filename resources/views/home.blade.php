@@ -128,15 +128,15 @@
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
                                 </p>
     
-                                <div class="row">
-                                    <div class="col me-1 me-lg-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="me-1 me-lg-2">
                                         <a href="#">
                                             <span class="badge rounded-fill text-bg-light">Laravel</span>
                                         </a>
                                     </div>
     
-                                    <div class="col-5 col-lg-7">
-                                        <div class="avatar-sm-wrapper d-inline-block">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm-wrapper d-flex align-items-center">
                                             <a href="" class="me-1">
                                                 <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
                                             </a>
@@ -155,26 +155,26 @@
                     </div>
     
                     {{-- comment 2 --}}
-                    <div class="col-12 col-lg-4 mb-3">
+                     <div class="col-12 col-lg-4 mb-3">
                         <div class="card">
                             <a href="#">
-                                <h3>Membuat Rumus Sederhana Diexcel?</h3>
+                                <h3>Membuat Validasi di Laravel?</h3>
                             </a>
     
                             <div>
                                 <p class="mb-5">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi ipsa est voluptate quaerat ea repellat quia. Dolorum animi illo officiis.
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
                                 </p>
     
-                                <div class="row">
-                                    <div class="col me-1 me-lg-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="me-1 me-lg-2">
                                         <a href="#">
                                             <span class="badge rounded-fill text-bg-light">Laravel</span>
                                         </a>
                                     </div>
     
-                                    <div class="col-5 col-lg-7">
-                                        <div class="avatar-sm-wrapper d-inline-block">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm-wrapper d-flex align-items-center">
                                             <a href="" class="me-1">
                                                 <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
                                             </a>
@@ -193,26 +193,26 @@
                     </div>
     
                     {{-- comment 3 --}}
-                    <div class="col-12 col-lg-4 mb-3">
+                     <div class="col-12 col-lg-4 mb-3">
                         <div class="card">
                             <a href="#">
-                                <h3>Lorem ipsum dolor sit, amet consectetur adipisicing?</h3>
+                                <h3>Membuat Validasi di Laravel?</h3>
                             </a>
     
                             <div>
                                 <p class="mb-5">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dignissimos id enim ab placeat iste exercitationem officia possimus, porro quasi.
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
                                 </p>
     
-                                <div class="row">
-                                    <div class="col me-1 me-lg-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="me-1 me-lg-2">
                                         <a href="#">
                                             <span class="badge rounded-fill text-bg-light">Laravel</span>
                                         </a>
                                     </div>
     
-                                    <div class="col-5 col-lg-7">
-                                        <div class="avatar-sm-wrapper d-inline-block">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm-wrapper d-flex align-items-center">
                                             <a href="" class="me-1">
                                                 <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
                                             </a>
@@ -229,6 +229,7 @@
                             </div>
                         </div>
                     </div>
+                  
                 </div>
             </div>
         </section>
