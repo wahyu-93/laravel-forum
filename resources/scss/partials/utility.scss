@@ -3,6 +3,11 @@
     width: auto;   /* biar proporsi nggak rusak */
 }
 
+.h-64px {
+    height: 64px;  /* ubah sesuai kebutuhan, misal 48px atau 64px */
+    width: auto;   /* biar proporsi nggak rusak */
+}
+
 .navbar-nav {
     .nav-link.active {
         color: $white;

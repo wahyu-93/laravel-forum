@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand fw-bold text-dark" href="#">
-            <img class="h-48px" src="{{ asset('assets/images/logo3.png') }}" alt="Logo">
+            <img class="h-48px" src="{{ asset('assets/images/logo-hitam.png') }}" alt="Logo">
         </a>
 
         <!-- Toggle button kalau layar kecil -->
