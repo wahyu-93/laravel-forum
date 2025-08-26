@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/login', function () {
     return view('pages.auth.login');
@@ -24,3 +24,11 @@ Route::get('/login', function () {
 Route::get('/sign-up', function () {
     return view('pages.auth.register');
 })->name('sign-up');
+
+Route::get('/discussions', function () {
+    return view('pages.discussions.index');
+})->name('discussions.index');
+
+Route::get('/discussions/{slug}', function () {
+    return view('pages.discussions.show');
+})->name('discussions.show');

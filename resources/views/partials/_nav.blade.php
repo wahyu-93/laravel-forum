@@ -14,11 +14,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active fw-bold" href="#">Home</a>
+                    <a class="nav-link active fw-bold" href="{{ route('home') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Discussions</a>
+                    <a class="nav-link" href="{{ route('discussions.index') }}">Discussions</a>
                 </li>
                 
                 <li class="nav-item">
@@ -40,8 +40,8 @@
 
             <!-- Tombol -->
             <div class="d-flex gap-2 ms-auto">
-                <a href="#" class="btn btn-secondary">Login</a>
-                <a href="#" class="btn btn-primary">Sign Up</a>
+                <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+                <a href="{{ route('sign-up') }}" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
     </div>
