@@ -29,6 +29,10 @@ Route::get('/discussions', function () {
     return view('pages.discussions.index');
 })->name('discussions.index');
 
+Route::get('/discussions/create', function () {
+    return view('pages.discussions.create');
+})->name('discussions.create');
+
 Route::get('/discussions/{slug}', function () {
     return view('pages.discussions.show');
 })->name('discussions.show');

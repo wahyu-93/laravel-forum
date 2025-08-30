@@ -57,7 +57,7 @@
                                         </div>
 
                                         <span class="fs-12px d-flex flex-column">
-                                            <a href="" class="me-1 fw-bold">Muhammad Hanif Al Fatih</a>
+                                            <a href="" class="me-1 fw-bold">Al Fatih</a>
                                             <span class="color-gray">
                                                 10 Hours Ago
                                             </span>
