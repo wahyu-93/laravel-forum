@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','BeeForum - Discussions')
+
 @section('body')
     <section class="bg-gray pt-4 pb-5 flex-grow-1">
         <div class="container">

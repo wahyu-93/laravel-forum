@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','BeeForum - Discussions')
+@section('title','BeeForum - Answer')
 
 @section('body')
     <div class="bg-gray pt-5 pb-5 flex-grow-1">
@@ -9,7 +9,7 @@
                 <div class="d-flex align-items-center">
                     <div class="d-flex">
                         <div class="fs-2 fw-bold me-2 mb-0">
-                            Ask a Question
+                            Answer a Question
                         </div>
                     </div>
                 </div>
@@ -22,26 +22,12 @@
                             <div class="col-12">
                                 <form action="" method="post">
                                     <div class="form-group mb-3">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input type="text" name="title" id="title" class="form-control">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="category_id" class="form-label">Category</label>
-                                        <select name="category_id" id="category_id" class="form-select">
-                                            <option value="">Elequent ORM</option>
-                                            <option value="">Facades</option>
-                                            <option value="">Helper</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group mb-3">
                                         <label for="content" class="form-label">Content</label>
                                         <textarea name="content" id="content" class="form-control" cols="30" rows="10"></textarea>
                                     </div>
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary">Create Question</button>
+                                        <button type="submit" class="btn btn-primary">Create Answer</button>
                                         <a href="" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
@@ -58,7 +44,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
     <script>
         $('#content').summernote({
-            placeholder: 'the details of your problem | what did you try | what you were expecting  ',
+            placeholder: 'Your Solution',
             tabsize: 2,
             height: 320,
             toolbar: [

@@ -36,3 +36,15 @@ Route::get('/discussions/create', function () {
 Route::get('/discussions/{slug}', function () {
     return view('pages.discussions.show');
 })->name('discussions.show');
+
+Route::get('/answers/{slug}', function () {
+    return view('pages.answers.create');
+})->name('answers.create');
+
+Route::get('/profile/{id}', function () {
+    return view('pages.profile.index');
+})->name('profile.index');
+
+Route::get('/profile/{id}/edit', function () {
+    return view('pages.profile.edit');
+})->name('profile.edit');

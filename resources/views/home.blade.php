@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','BeeForum - Home')
+
 @section('body')
     {{-- hero section --}}
     <section class="container hero">
