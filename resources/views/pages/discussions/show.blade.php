@@ -44,7 +44,7 @@
                                         <span class="color-gray ps-2">
                                             <a href="javascript:;" id="share-discussion">
                                                 <small>Share</small>
-                                           </a>
+                                            </a>
 
                                            <input type="text" id="current-url" value="{{ route('discussions.show',['tes ']) }}" class="d-none">
                                         </span>
