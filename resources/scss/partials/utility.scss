@@ -120,6 +120,7 @@ a {
 .avatar-sm-wrapper {
     height: 24px;
     width: 24px;
+    object-fit: cover;
 }
 
 .avatar {
@@ -157,6 +158,7 @@ pre {
 .avatar-wrapper {
     height: 128px;
     width: 128px;
+    overflow: hidden;   
 }
 
 .avatar-nav-wrapper {

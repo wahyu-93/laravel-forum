@@ -12,7 +12,7 @@
                             <div class="edit-avatar-wrapper mb-3 mb-md-0 mx-auto mx-md-0">
                                 <div class="avatar-wrapper d-flex align-items-center">
                                     <a href="" class="me-1">
-                                        <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                                        <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle" id="avatar">
                                     </a>
                                 </div>
 
@@ -38,7 +38,7 @@
 
                                 <div class="form-group mb-3">
                                     <label for="password" class="form-label">Confirm Password</label>
-                                    <input type="pasword" name="password" id="password" class="form-control">
+                                    <input type="pasword" name="confirmPassword" id="confirmPassword" class="form-control">
                                     <span class="color-gray fst-italic">
                                         *empty this if you don't want to change password
                                     </span>
@@ -54,3 +54,16 @@
         </div>
     </section>
 @endsection
+
+@push('after-script')
+    <script>
+        $('#picture').on('change', function(event){
+            var output = $('#avatar');
+            
+            output.attr('src', URL.createObjectURL(event.target.files[0]));
+            output.onload = function() {
+                URL.revokeObjectURL(output.attr('src'))
+            }
+        })
+    </script>
+@endpush
