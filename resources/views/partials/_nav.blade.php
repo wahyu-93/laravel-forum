@@ -41,7 +41,7 @@
             <!-- Tombol -->
             <div class="d-flex gap-2 ms-auto">
                 <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
-                <a href="{{ route('sign-up') }}" class="btn btn-primary">Sign Up</a>
+                <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
     </div>
