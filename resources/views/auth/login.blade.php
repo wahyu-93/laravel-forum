@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title','Login - BeeForum')
+
 @section('body')
     <section class="bg-gray vh-100">
         <div class="container h-100 pt-5">
