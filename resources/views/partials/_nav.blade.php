@@ -38,11 +38,44 @@
                 </div>
             </form>
 
-            <!-- Tombol -->
-            <div class="d-flex gap-2 ms-auto">
-                <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
-                <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
-            </div>
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                @auth
+                    <li class="nav-item my-auto dropdown">
+                        <a class="nav-link p-0 d-flex align-items-center" href="javascript:;" data-bs-toggle="dropdown">
+                            <div class="avatar-nav-wrapper me-2">
+                                <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                            </div>
+
+                            <span class="fw-bold">
+                               {{ auth()->user()->username }}
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu mt-2">
+                            <li>
+                                <a href="" class="dropdown-item">
+                                    My Profile
+                                </a>
+                            </li>
+
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endauth
+    
+                @guest
+                    <!-- Tombol -->
+                    <div class="d-flex gap-2 ms-auto">
+                        <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
+                    </div>    
+                @endguest
+            </ul>
         </div>
     </div>
 </nav>

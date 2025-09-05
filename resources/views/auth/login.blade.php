@@ -29,7 +29,7 @@
                                     <label for="password" class="form-label">Password</label>
                                     
                                     <div class="input-group">
-                                        <input type="text" class="form-control border-end-0 rounded-0 rounded-start @error('password') is-invalid @enderror" name="password" id="password">
+                                        <input type="password" class="form-control border-end-0 rounded-0 rounded-start @error('password') is-invalid @enderror" name="password" id="password">
                                         <span class="input-group-text bg-white border-start-0 pe-auto" id="basic-addon2">
                                             <a href="javascript:;" id="password-toggle">
                                                 <img src="{{ url('assets/images/eye-slash.png') }}" alt="password" id="password-toggle-img">
