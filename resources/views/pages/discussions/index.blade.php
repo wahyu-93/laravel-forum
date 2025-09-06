@@ -14,7 +14,9 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn btn-primary">Create New Discussion</a>
+                @auth
+                    <a href="#" class="btn btn-primary">Create New Discussion</a>
+                @endauth
             </div>
 
             <div class="row">

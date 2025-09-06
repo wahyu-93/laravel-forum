@@ -43,7 +43,11 @@
                     <li class="nav-item my-auto dropdown">
                         <a class="nav-link p-0 d-flex align-items-center" href="javascript:;" data-bs-toggle="dropdown">
                             <div class="avatar-nav-wrapper me-2">
-                                <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                                @if(auth()->user()->image)
+                                    <img src="{{ storage(auth()->user()->image) }}" class="avatar rounded-circle">
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="avatar rounded-circle">
+                                @endif
                             </div>
 
                             <span class="fw-bold">
