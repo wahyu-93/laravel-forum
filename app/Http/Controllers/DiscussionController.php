@@ -11,9 +11,22 @@ use Illuminate\Support\Str;
 
 class DiscussionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.discussions.index');
+        $categories = Category::all();
+        $search = $request->search;
+
+        if($request->search){
+            $discussions = Discussion::with(['user', 'category'])
+                            ->where('title', 'like', '%'.$request->search.'%')
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(10)->withQueryString(); //withQueryString berfungsi untuk membawa nilai search ke halaman berikutnya
+        }
+        else {
+            $discussions = Discussion::with(['user', 'category'])->orderBy('created_at','DESC')->paginate(10);
+        }
+        
+        return view('pages.discussions.index', compact('discussions', 'categories', 'search'));
     }
 
     public function create()

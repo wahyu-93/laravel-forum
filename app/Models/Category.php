@@ -25,4 +25,9 @@ class Category extends Model
             $model->slug = Str::slug($model->name);
         });
     }
+
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class);
+    }
 }
