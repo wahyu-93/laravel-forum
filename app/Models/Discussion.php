@@ -11,7 +11,7 @@ class Discussion extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id','categories_id','title','content_preview','content'];
+    protected $fillable = ['user_id','category_id','title','content_preview','content'];
 
     public static function boot()
     {

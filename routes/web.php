@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,17 +19,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/discussions', function () {
-    return view('pages.discussions.index');
-})->name('discussions.index');
 
-Route::get('/discussions/create', function () {
-    return view('pages.discussions.create');
-})->name('discussions.create');
-
-Route::get('/discussions/{slug}', function () {
-    return view('pages.discussions.show');
-})->name('discussions.show');
+// Route::get('/discussions/{slug}', function () {
+//     return view('pages.discussions.show');
+// })->name('discussions.show');
 
 Route::get('/answers/{slug}', function () {
     return view('pages.answers.create');
@@ -46,10 +40,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/discussion', [DiscussionController::class, 'index'])->name('discussion.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // discussions
+    Route::resource('discussion', DiscussionController::class)->only(['create','store','edit','update','destroy']);
 });
 
 require __DIR__.'/auth.php';

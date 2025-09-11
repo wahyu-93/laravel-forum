@@ -15,7 +15,7 @@
                 </div>
 
                 @auth
-                    <a href="#" class="btn btn-primary">Create New Discussion</a>
+                    <a href="{{ route('discussion.create') }}" class="btn btn-primary">Create New Discussion</a>
                 @endauth
             </div>
 
@@ -182,3 +182,17 @@
         </div>
     </section>
 @endsection
+
+@push('after-script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // hanya ambil toast dari backend
+            var toastElList = [].slice.call(document.querySelectorAll('.backend-toast'))
+            
+            toastElList.map(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl)
+                toast.show()
+            })
+        });
+    </script>
+@endpush

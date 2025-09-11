@@ -148,7 +148,7 @@
                         Please 
                         <a href="{{ route('login') }}" class="text-decoration-underline text-primary">login</a> 
                         or 
-                        <a href="{{ route('sign-up') }}" class="text-decoration-underline text-primary">create an account</a> 
+                        {{-- <a href="{{ route('sign-up') }}" class="text-decoration-underline text-primary">create an account</a>  --}}
                         to participate in this forum
                     </div>
                 </div>

@@ -18,7 +18,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('discussions.index') }}">Discussions</a>
+                    <a class="nav-link" href="{{ route('discussion.index') }}">Discussions</a>
                 </li>
                 
                 <li class="nav-item">
