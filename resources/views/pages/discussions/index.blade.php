@@ -46,7 +46,7 @@
                                     </a>
                                 
                                     <p>
-                                        {{ $discussion->content_preview }}
+                                        {!! $discussion->content_preview !!}
                                     </p>
                                     
                                     <div class="d-flex justify-content-between align-items-center">
@@ -83,6 +83,8 @@
                             curently no discussions yet
                         </div>    
                     @endforelse
+
+                   {{ $discussions->links() }}
 
                 </div>
 
