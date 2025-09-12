@@ -66,4 +66,20 @@ class DiscussionController extends Controller
     {
         //
     }
+
+    public function byCategory($slug)
+    {
+        $categories = Category::all();
+        $discussions = Discussion::with(['user', 'category'])
+                        ->whereHas('category', function($query) use ($slug){
+                            $query->where('slug', $slug);
+                        })
+                        ->orderBy('created_at','DESC')
+                        ->paginate(10)
+                        ->withQueryString();
+
+        $categorySelect = Category::where('slug', $slug)->first();
+
+        return view('pages.discussions.index', compact('discussions', 'categories', 'categorySelect'));
+    }
 }

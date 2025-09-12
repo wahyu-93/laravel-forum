@@ -11,7 +11,7 @@
                         @if (isset($search))
                             Search Results For "{{ $search }}"
                         @else 
-                            All Discussions   
+                            All Discussions  @if(isset($categorySelect)) about "{{ $categorySelect->name }}" @endif
                         @endif
                     </h2>
                     
@@ -51,7 +51,7 @@
                                     
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="me-1 me-lg-2">
-                                            <a href="#">
+                                            <a href="{{ route('discussion.category', $discussion->category->slug) }}">
                                                 <span class="badge rounded-fill text-bg-light">{{ $discussion->category->name }}</span>
                                             </a>
                                         </div>
@@ -93,12 +93,16 @@
                         <h3>All Categories</h3>
                         <div>
                             @forelse ($categories as $category)
-                                <a href="">
+                                <a href="{{ route('discussion.category', $category->slug) }}">
                                     <span class="badge rounded-pill text-bg-light">{{ $category->name }}</span>
                                 </a>
                             @empty
                                 curently no categories yet
                             @endforelse
+                            
+                            <a href="{{ route('discussion.index') }}">
+                                <span class="badge rounded-pill text-bg-light">All Category</span>
+                            </a>
                         </div>
                     </div>
                 </div>
