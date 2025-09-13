@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('content_preview');
             $table->text('content');
+            $table->enum('status',['create','updated']);
             $table->timestamps();
             $table->softDeletes();
         });

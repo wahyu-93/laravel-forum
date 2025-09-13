@@ -27,7 +27,7 @@
                             Share
                         </a>
 
-                        <input type="text" id="current-url" value="{{ route('discussions.show',['tes ']) }}" class="d-none">
+                        <input type="text" id="current-url" value="" class="d-none">
 
                         <a href="" class="btn btn-secondary">Edit Profile</a>
                     </div>

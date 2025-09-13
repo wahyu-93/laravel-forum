@@ -20,6 +20,11 @@
                 <div class="col-12 col-lg-8 mb-5 mb-lg-0">
                     <div class="card card-discussions">
                         <div class="row">
+                            {{-- edit dan delete jika sesuai dengan user yg login --}}
+                            <div class="d-flex align-items-end justify-content-center justify-content-md-end gap-1">
+                                
+                            </div>
+                            
                             <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-center justify-content-center">
                                 <a href="javascript:;" 
                                     id="discussion-like" 
@@ -40,20 +45,48 @@
                                 </p>
                                 
                                 <div class="d-flex justify-content-between align-items-center text-start">
-                                    <div class="me-1 me-lg-2 d-flex flex-column">
-                                        <a href="{{ route('discussion.category', $discussion->category->slug) }}">
-                                            <span class="badge rounded-pill text-bg-light ps-2">{{ $discussion->category->name }}</span>
-                                        </a>
+                                    <div class="me-1 me-lg-2 d-flex flex-column gap-2">
+                                        <div>
+                                            <a href="{{ route('discussion.category', $discussion->category->slug) }}">
+                                                <span class="badge rounded-pill text-bg-light ps-2">{{ $discussion->category->name }}</span>
+                                            </a>
 
-                                        <span class="color-gray ps-2">
-                                            <a href="javascript:;" id="share-discussion">
-                                                <small>Share</small>
+                                            @if ($discussion->status === 'updated')
+                                                <span class="badge rounded-pill text-bg-light ps-2">Diedit oleh penulis {{ $discussion->updated_at->diffForHumans() }}</span>
+                                            @endif
+                                        </div>                                     
+
+                                        <div class="d-flex flex-row gap-1 align-items-center p-1">
+                                            {{-- tombol share --}}
+                                            <a href="javascript:;" id="share-discussion" class="btn btn-info rounded-circle d-flex justify-content-center align-items-center p-0" style="width:25px; height:25px;" title="Share">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                                                    <path d="M13.5 1a1.5 1.5 0 1 0 0 3   1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+                                                </svg>
                                             </a>
 
                                            <input type="text" id="current-url" value="{{ route('discussion.show', $discussion->slug) }}" class="d-none">
-                                        </span>
-                                        
-                                    </div>
+
+                                            @auth
+                                                {{-- muncuk ketika user sesuai dengan yg membuat post --}}
+                                                @if($discussion->user_id === Auth::user()->id)
+                                                    <!-- Tombol Edit -->
+                                                    <a href="{{ route('discussion.edit', $discussion) }}" class="btn btn-light rounded-circle d-flex justify-content-center align-items-center p-0" style="width:25px; height:25px;" title="Edit" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                                                        </svg>
+                                                    </a>
+            
+                                                    <!-- Tombol Delete -->
+                                                    <a href="" class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center p-0" style="width:25px; height:25px;" title="Delete">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                        </svg>
+                                                    </a>
+                                                @endif
+                                            @endauth
+                                        </div>
+                                    </div>                                    
 
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">

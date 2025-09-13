@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Discussion\StoreRequest;
+use App\Http\Requests\Discussion\UpdateRequest;
 use App\Models\Category;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
@@ -54,12 +55,36 @@ class DiscussionController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $discussion = Discussion::with(['user', 'category'])->where('slug', $id)->first();
+
+        if(!$discussion){
+            abort(404);
+        };
+
+        $isOwnedByUser = $discussion->user_id === auth()->id();
+
+        if(!$isOwnedByUser){
+            abort(404);
+        };
+
+        $categories = Category::all();
+        return view('pages.discussions.edit', compact('discussion','isOwnedByUser', 'categories'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, $slug)
     {
-        //
+        $discussionUpdate = Discussion::whereSlug($slug)->firstOrFail();
+
+        $discussion = $request->except(['_token']);
+        $discussion['user_id'] = Auth::user()->id;
+
+        $stripContent = strip_tags($discussion['content']);
+        $isContentLong = strlen($stripContent) > 120;
+        $discussion['content_preview'] = $isContentLong ? (substr($stripContent,0,120) . '...') : $stripContent;
+
+        $discussionUpdate->update($discussion);
+
+        return redirect()->route('discussion.index')->with('success', 'Question Has Been Updated');
     }
 
     public function destroy(string $id)
@@ -86,12 +111,16 @@ class DiscussionController extends Controller
     public function show($slug)
     {
         $discussion = Discussion::with(['user', 'category'])->where('slug', $slug)->first();
+
+        if(!$discussion){
+            abort(404);
+        };
+
         $categories = Category::all();
 
         // mengecek apakah discussion yang dipilih ini sudah disukai oleh user aktif ini atau belum
         $likeImage = url('assets/images/like.png');
         $likedImage = url('assets/images/liked.png');
-
 
         return view('pages.discussions.show', compact('discussion', 'categories', 'likeImage', 'likedImage'));
     }

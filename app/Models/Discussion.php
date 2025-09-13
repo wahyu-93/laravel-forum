@@ -24,7 +24,13 @@ class Discussion extends Model
 
         static::updating(function($model){
             $model->slug = Str::slug($model->title);
+            $model->status = 'updated';
         });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     public function user()
