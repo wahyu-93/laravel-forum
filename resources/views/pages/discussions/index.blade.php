@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="col-12 col-lg-10">
-                                    <a href="">
+                                    <a href="{{ route('discussion.show', $discussion->slug) }}">
                                         <h4>{{ $discussion->title }}</h4>
                                     </a>
                                 

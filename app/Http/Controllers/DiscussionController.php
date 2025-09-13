@@ -82,4 +82,17 @@ class DiscussionController extends Controller
 
         return view('pages.discussions.index', compact('discussions', 'categories', 'categorySelect'));
     }
+
+    public function show($slug)
+    {
+        $discussion = Discussion::with(['user', 'category'])->where('slug', $slug)->first();
+        $categories = Category::all();
+
+        // mengecek apakah discussion yang dipilih ini sudah disukai oleh user aktif ini atau belum
+        $likeImage = url('assets/images/like.png');
+        $likedImage = url('assets/images/liked.png');
+
+
+        return view('pages.discussions.show', compact('discussion', 'categories', 'likeImage', 'likedImage'));
+    }
 }

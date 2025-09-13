@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DiscussionController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +20,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
-// Route::get('/discussions/{slug}', function () {
-//     return view('pages.discussions.show');
-// })->name('discussions.show');
-
 Route::get('/answers/{slug}', function () {
     return view('pages.answers.create');
 })->name('answers.create');
@@ -41,7 +37,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/discussion', [DiscussionController::class, 'index'])->name('discussion.index');
-Route::get('disucssion/category/{slug}', [DiscussionController::class, 'byCategory'])->name('discussion.category');
+Route::get('/discussion/p/{slug}', [DiscussionController::class, 'show'])->name('discussion.show');
+Route::get('/discussion/category/{slug}', [DiscussionController::class, 'byCategory'])->name('discussion.category');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,6 +47,11 @@ Route::middleware('auth')->group(function () {
 
     // discussions
     Route::resource('discussion', DiscussionController::class)->only(['create','store','edit','update','destroy']);
+
+    // like discussion
+    Route::post('/discussion/{slug}/like', [LikeController::class, 'discussionLike'])->name('discussion.like');
+    Route::post('/discussion/{slug}/unlike', [LikeController::class, 'discussionUnLike'])->name('discussion.unlike');
+
 });
 
 require __DIR__.'/auth.php';
