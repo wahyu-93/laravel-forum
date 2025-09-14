@@ -189,14 +189,35 @@
                             </div>
                         </div>
                     </div>
+
+                    @auth
+                        <h3 class="mb-3">Your Answer</h3>
+                        <div class="card card-discussion">
+                            <form action="{{ route('discussion.answer', $discussion) }}" method="POST">
+                                @csrf
+    
+                                <textarea name="answer" id="answer" class="@error('answer') is-invalid @enderror"></textarea>
+                                @error('answer')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    @endauth
+
+                    @guest
+                        <div class="text-center fw-bold">
+                            Please 
+                            <a href="{{ route('login') }}" class="text-decoration-underline text-primary">login</a> 
+                            or 
+                            <a href="{{ route('register') }}" class="text-decoration-underline text-primary">create an account</a> 
+                            to participate in this forum
+                        </div>
+                    @endguest
                  
-                    <div class="text-center fw-bold">
-                        Please 
-                        <a href="{{ route('login') }}" class="text-decoration-underline text-primary">login</a> 
-                        or 
-                        <a href="{{ route('register') }}" class="text-decoration-underline text-primary">create an account</a> 
-                        to participate in this forum
-                    </div>
                 </div>
 
 
@@ -224,7 +245,18 @@
 @endsection
 
 @push('after-script')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // hanya ambil toast dari backend
+            var toastElList = [].slice.call(document.querySelectorAll('.backend-toast'))
+            
+            toastElList.map(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl)
+                toast.show()
+            })
+        });
+
         $(document).ready(function(){
             $('#share-discussion').click(function(){
                 var copyText = $('#current-url');
@@ -251,6 +283,23 @@
                 // var alertContaoner = alert.find('.container');
                 // alertContaoner.first().text('link to this discussion copied successfully');
             })
+
+            $('#answer').summernote({
+                placeholder: 'Your Answer',
+                tabsize: 2,
+                height: 200,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['codeview', 'help']]
+                ]
+            });
+
+            $('span.note-icon-caret').remove();
 
             $('#discussion-like').click(function(){
                 // cek isi data-liked

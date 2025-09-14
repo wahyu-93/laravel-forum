@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
@@ -51,6 +52,9 @@ Route::middleware('auth')->group(function () {
     // like discussion
     Route::post('/discussion/{slug}/like', [LikeController::class, 'discussionLike'])->name('discussion.like');
     Route::post('/discussion/{slug}/unlike', [LikeController::class, 'discussionUnLike'])->name('discussion.unlike');
+
+    // answer
+    Route::post('/discussion/{discussion}/answer', [AnswerController::class, 'store'])->name('discussion.answer');
 
 });
 
