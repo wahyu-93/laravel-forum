@@ -87,9 +87,11 @@ class DiscussionController extends Controller
         return redirect()->route('discussion.index')->with('success', 'Question Has Been Updated');
     }
 
-    public function destroy(string $id)
+    public function destroy(Discussion $discussion)
     {
-        //
+        $discussion->delete();
+
+        return redirect()->route('discussion.index')->with('success', 'Question Has Been Deleted');
     }
 
     public function byCategory($slug)
