@@ -121,16 +121,17 @@
                                 <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-center justify-content-center">
                                     {{-- like dan unlike answer --}}
                                     <a href="javascript:;" 
-                                        id="answer-like" 
+                                        class="answer-like" 
+                                        data-id={{ $answer->id }}
                                         data-answer-liked="{{ $answer->liked() }}"
                                         data-answer-like-url="{{ route('answer.like', $answer->id) }}"
                                         data-answer-unlike-url="{{ route('answer.unlike', $answer->id) }}"
                                         data-answer-like-icon="{{ $likedImage }}"
                                         data-answer-unlike-icon="{{ $likeImage }}">
-                                            <img src="{{ $answer->liked() ? $likedImage : $likeImage }}" alt="like" class="like-icon" id="answer-like-icon">
+                                            <img src="{{ $answer->liked() ? $likedImage : $likeImage }}" alt="like" class="like-icon answer-like-icon">
                                     </a>
 
-                                    <span id="answer-like-count" class="fs-4 color-gray mb-1 text-center">{{ $answer->likeCount }}</span>
+                                    <span id="answer-like-count-{{ $answer->id }}" class="fs-4 color-gray mb-1 text-center">{{ $answer->likeCount }}</span>
                                 </div>
 
                                 <div class="col-12 col-lg-10">                            
@@ -333,15 +334,16 @@
                 })
             })
 
-            $('#answer-like').click(function(){
-                // cek isi data-answer-liked
-                var isLiked = $(this).data('answer-liked');
-                var likeIcon = $(this).data('answer-like-icon')
-                var unLikeIcon = $(this).data('answer-unlike-icon')
-            
-                // cek isi isLiked kalo isinya ada isi routenya unlike, kalo kosong isi routenya like
-                var likeRoute = isLiked ? $(this).data('answer-unlike-url') : $(this).data('answer-like-url');
+            $('.answer-like').click(function(){
+                var $this = $(this);
+                var id = $this.data('id');
 
+                var isLiked = $this.data('answer-liked');
+                var likeIcon = $this.data('answer-like-icon');
+                var unLikeIcon = $this.data('answer-unlike-icon');
+                
+                var likeRoute = isLiked ? $this.data('answer-unlike-url') : $this.data('answer-like-url');
+                
                 $.ajax({
                     method : 'POST',
                     url : likeRoute,
@@ -351,16 +353,13 @@
                 })
                 .done(function(res){
                     if(res.status === 'success'){
-                        $('#answer-like-count').text(res.data.likeCount);
+                        $('#answer-like-count-' + id).text(res.data.likeCount);
 
-                        if(isLiked){
-                            $('#answer-like-icon').attr('src', unLikeIcon)
-                        }
-                        else {
-                            $('#answer-like-icon').attr('src', likeIcon)
-                        }
+                        // update icon
+                        $this.find('.answer-like-icon').attr('src', isLiked ? unLikeIcon : likeIcon);
 
-                        $('#answer-like').data('answer-liked', !isLiked)
+                        // toggle status
+                        $this.data('answer-liked', !isLiked);
                     }
                 })
                 .fail(function(xhr, status, error) {
@@ -376,9 +375,9 @@
                     toast.show();
 
                     // redirect ke login
-                    // setTimeout(function() {
-                    //     window.location.href = "{{ route('login') }}";
-                    // }, 2000);
+                    setTimeout(function() {
+                        window.location.href = "{{ route('login') }}";
+                    }, 2000);
                 })
             })
         })
