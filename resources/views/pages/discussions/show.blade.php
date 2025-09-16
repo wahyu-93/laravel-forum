@@ -20,12 +20,9 @@
                 <div class="col-12 col-lg-8 mb-5 mb-lg-0">
                     <div class="card card-discussions">
                         <div class="row">
-                            {{-- edit dan delete jika sesuai dengan user yg login --}}
-                            <div class="d-flex align-items-end justify-content-center justify-content-md-end gap-1">
-                                
-                            </div>
-                            
+                            {{-- edit dan delete jika sesuai dengan user yg login --}}                            
                             <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-center justify-content-center">
+                                {{-- like dan unlike discussion --}}
                                 <a href="javascript:;" 
                                     id="discussion-like" 
                                     data-liked="{{ $discussion->liked() }}"
@@ -52,7 +49,7 @@
                                             </a>
 
                                             @if ($discussion->status === 'updated')
-                                                <span class="badge rounded-pill text-bg-light ps-2">Diedit oleh penulis {{ $discussion->updated_at->diffForHumans() }}</span>
+                                                <span class="badge rounded-pill text-bg-light ps-2 fw-normal fst-italic">Diedit oleh penulis {{ $discussion->updated_at->diffForHumans() }}</span>
                                             @endif
                                         </div>                                     
 
@@ -121,12 +118,19 @@
                     @forelse ($answers as $answer)
                         <div class="card card-discussions">
                             <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end justify-content-center">
-                                    <a href="">
-                                        <img src="{{ url('assets/images/like.png') }}" alt="like" class="like-icon">
+                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-center justify-content-center">
+                                    {{-- like dan unlike answer --}}
+                                    <a href="javascript:;" 
+                                        id="answer-like" 
+                                        data-answer-liked="{{ $answer->liked() }}"
+                                        data-answer-like-url="{{ route('answer.like', $answer->id) }}"
+                                        data-answer-unlike-url="{{ route('answer.unlike', $answer->id) }}"
+                                        data-answer-like-icon="{{ $likedImage }}"
+                                        data-answer-unlike-icon="{{ $likeImage }}">
+                                            <img src="{{ $answer->liked() ? $likedImage : $likeImage }}" alt="like" class="like-icon" id="answer-like-icon">
                                     </a>
 
-                                    <span class="fs-4 color-gray mb-1">30</span>
+                                    <span id="answer-like-count" class="fs-4 color-gray mb-1 text-center">{{ $answer->likeCount }}</span>
                                 </div>
 
                                 <div class="col-12 col-lg-10">                            
@@ -147,7 +151,11 @@
                                             </div>
 
                                             <span class="fs-12px d-flex flex-column">
-                                                <a href="" class="me-1 fw-bold">{{ $answer->user->name }}</a>
+                                                <a href="" class="me-1 fw-bold">{{ $answer->user->name }} 
+                                                    @if ($answer->user->id === $discussion->user_id)
+                                                        <span class="fw-normal fst-italic">. Pembuat</span>
+                                                    @endif
+                                                </a>
                                                 <span class="color-gray">
                                                     {{ $answer->created_at->diffForHumans() }}
                                                 </span>
@@ -285,7 +293,7 @@
                 // cek isi isLiked kalo isinya ada isi routenya unlike, kalo kosong isi routenya like
                 var likeRoute = isLiked ? $(this).data('unlike-url') : $(this).data('like-url');
 
-                  $.ajax({
+                $.ajax({
                     method : 'POST',
                     url : likeRoute,
                     data : {
@@ -293,7 +301,6 @@
                     }
                 })
                 .done(function(res){
-                    console.log(res)
                     if(res.status === 'success'){
                         $('#discussion-like-count').text(res.data.likeCount);
 
@@ -323,6 +330,55 @@
                     setTimeout(function() {
                         window.location.href = "{{ route('login') }}";
                     }, 2000);
+                })
+            })
+
+            $('#answer-like').click(function(){
+                // cek isi data-answer-liked
+                var isLiked = $(this).data('answer-liked');
+                var likeIcon = $(this).data('answer-like-icon')
+                var unLikeIcon = $(this).data('answer-unlike-icon')
+            
+                // cek isi isLiked kalo isinya ada isi routenya unlike, kalo kosong isi routenya like
+                var likeRoute = isLiked ? $(this).data('answer-unlike-url') : $(this).data('answer-like-url');
+
+                $.ajax({
+                    method : 'POST',
+                    url : likeRoute,
+                    data : {
+                        '_token' : '{{ csrf_token() }}'
+                    }
+                })
+                .done(function(res){
+                    if(res.status === 'success'){
+                        $('#answer-like-count').text(res.data.likeCount);
+
+                        if(isLiked){
+                            $('#answer-like-icon').attr('src', unLikeIcon)
+                        }
+                        else {
+                            $('#answer-like-icon').attr('src', likeIcon)
+                        }
+
+                        $('#answer-like').data('answer-liked', !isLiked)
+                    }
+                })
+                .fail(function(xhr, status, error) {
+                    // Debugging
+                    console.error('AJAX Error:', status, error);
+
+                    // ganti text dalam toast
+                    $('.toast-body').text('Anda Belum Login');
+
+                    // tampil toast
+                    var toastEl = document.getElementById('alert');
+                    var toast = new bootstrap.Toast(toastEl);
+                    toast.show();
+
+                    // redirect ke login
+                    // setTimeout(function() {
+                    //     window.location.href = "{{ route('login') }}";
+                    // }, 2000);
                 })
             })
         })
