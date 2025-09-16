@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Discussion\StoreRequest;
 use App\Http\Requests\Discussion\UpdateRequest;
+use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
@@ -18,13 +19,13 @@ class DiscussionController extends Controller
         $search = $request->search;
 
         if($request->search){
-            $discussions = Discussion::with(['user', 'category'])
+            $discussions = Discussion::with(['user', 'category', 'answers'])
                             ->where('title', 'like', '%'.$request->search.'%')
                             ->orderBy('created_at', 'DESC')
                             ->paginate(10)->withQueryString(); //withQueryString berfungsi untuk membawa nilai search ke halaman berikutnya
         }
         else {
-            $discussions = Discussion::with(['user', 'category'])->orderBy('created_at','DESC')->paginate(10);
+            $discussions = Discussion::with(['user', 'category', 'answers'])->orderBy('created_at','DESC')->paginate(10);
         }
         
         return view('pages.discussions.index', compact('discussions', 'categories', 'search'));
@@ -114,6 +115,8 @@ class DiscussionController extends Controller
     {
         $discussion = Discussion::with(['user', 'category'])->where('slug', $slug)->first();
 
+        $answers = Answer::with(['user','discussion'])->where('discussion_id', $discussion->id)->orderBy('created_at','DESC')->paginate(5);
+
         if(!$discussion){
             abort(404);
         };
@@ -123,7 +126,7 @@ class DiscussionController extends Controller
         // mengecek apakah discussion yang dipilih ini sudah disukai oleh user aktif ini atau belum
         $likeImage = url('assets/images/like.png');
         $likedImage = url('assets/images/liked.png');
-
-        return view('pages.discussions.show', compact('discussion', 'categories', 'likeImage', 'likedImage'));
+        
+        return view('pages.discussions.show', compact('discussion', 'categories', 'likeImage', 'likedImage', 'answers'));
     }
 }

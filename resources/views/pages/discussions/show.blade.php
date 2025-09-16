@@ -116,79 +116,54 @@
                         </div>
                     </div>
 
-                    <h3 class="mb-5">2 Answers</h3>
+                    <h3 class="mb-4">{{ $answers->count().' '. Str::plural('Answer', $answers->count()) }}</h3>
 
-                    {{-- answer 1 --}}
-                    <div class="card card-discussions">
-                        <div class="row">
-                            <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end justify-content-center">
-                                <a href="">
-                                    <img src="{{ url('assets/images/like.png') }}" alt="like" class="like-icon">
-                                </a>
+                    @forelse ($answers as $answer)
+                        <div class="card card-discussions">
+                            <div class="row">
+                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end justify-content-center">
+                                    <a href="">
+                                        <img src="{{ url('assets/images/like.png') }}" alt="like" class="like-icon">
+                                    </a>
 
-                                <span class="fs-4 color-gray mb-1">30</span>
-                            </div>
+                                    <span class="fs-4 color-gray mb-1">30</span>
+                                </div>
 
-                            <div class="col-12 col-lg-10">                            
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam tenetur, magni eum fugit culpa cumque. Nesciunt doloremque ratione aliquid velit tempora officiis earum aperiam nihil nulla? Facilis non incidunt minus!
-                                </p>
-                                
-                                <div class="d-flex justify-content-end align-items-center text-start">
-                                    <div class="d-flex align-items-center">
-                                        <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
-                                            <a href="" class="">
-                                                <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                            </a>
-                                        </div>
+                                <div class="col-12 col-lg-10">                            
+                                    <p>
+                                        {!! $answer->answer !!}
+                                    </p>
+                                    
+                                    <div class="d-flex justify-content-end align-items-center text-start">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
+                                                <a href="">
+                                                    @if($answer->user->image)
+                                                        <img src="{{ storage($answer->user->image) }}" class="avatar rounded-circle">
+                                                    @else
+                                                        <img src="https://ui-avatars.com/api/?name={{ $answer->user->name }}" class="avatar rounded-circle">
+                                                    @endif
+                                                </a>
+                                            </div>
 
-                                        <span class="fs-12px d-flex flex-column">
-                                            <a href="" class="me-1 fw-bold">Wahyu</a>
-                                            <span class="color-gray">
-                                                8 Hours Ago
+                                            <span class="fs-12px d-flex flex-column">
+                                                <a href="" class="me-1 fw-bold">{{ $answer->user->name }}</a>
+                                                <span class="color-gray">
+                                                    {{ $answer->created_at->diffForHumans() }}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- answer 2 --}}
-                    <div class="card card-discussions">
-                        <div class="row">
-                            <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end justify-content-center">
-                                <a href="">
-                                    <img src="{{ url('assets/images/like.png') }}" alt="like" class="like-icon">
-                                </a>
-
-                                <span class="fs-4 color-gray mb-1">10</span>
-                            </div>
-
-                            <div class="col-12 col-lg-10">                            
-                                <p>
-                                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, minima.
-                                </p>
-                                
-                                <div class="d-flex justify-content-end align-items-center text-start">
-                                    <div class="d-flex align-items-center">
-                                        <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
-                                            <a href="" class="">
-                                                <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                            </a>
-                                        </div>
-
-                                        <span class="fs-12px d-flex flex-column">
-                                            <a href="" class="me-1 fw-bold">Shanum</a>
-                                            <span class="color-gray">
-                                                10 Hours Ago
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="card card-discussion mb-4">
+                            Currently, there is no answer yet 
                         </div>
-                    </div>
+                    @endforelse
+
+                    {{ $answers->links() }}
 
                     @auth
                         <h3 class="mb-3">Your Answer</h3>

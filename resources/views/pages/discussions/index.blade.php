@@ -32,11 +32,11 @@
                             <div class="row">
                                 <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
                                     <div class="text-nowrap me-2 me-lg-0">
-                                        7 likes
+                                        {{ $discussion->likeCount . ' ' . Str::plural('Like', $discussion->likeCount) }} 
                                     </div>
 
                                     <div class="text-nowrap color-gray">
-                                        9 Answers
+                                        {{ $discussion->answers->count() . ' ' . Str::plural('Answer', $discussion->answers->count()) }} 
                                     </div>
                                 </div>
 
