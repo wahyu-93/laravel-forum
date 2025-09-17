@@ -57,7 +57,7 @@
 
                         <ul class="dropdown-menu mt-2">
                             <li>
-                                <a href="" class="dropdown-item">
+                                <a href="{{ route('profile.index', auth()->user()->username) }}" class="dropdown-item">
                                     My Profile
                                 </a>
                             </li>

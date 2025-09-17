@@ -35,7 +35,11 @@
 
                         <input type="text" id="current-url" value="" class="d-none">
 
-                        <a href="" class="btn btn-secondary">Edit Profile</a>
+                        @auth
+                            @if(auth()->user()->username === $user->username)
+                                <a href="" class="btn btn-secondary">Edit Profile</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
 
