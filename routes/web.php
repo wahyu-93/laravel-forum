@@ -21,13 +21,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/answers/{slug}', function () {
-    return view('pages.answers.create');
-})->name('answers.create');
-
-Route::get('/profile/{id}', function () {
-    return view('pages.profile.index');
-})->name('profile.index');
 
 Route::get('/profile/{id}/edit', function () {
     return view('pages.profile.edit');
@@ -41,10 +34,13 @@ Route::get('/discussion', [DiscussionController::class, 'index'])->name('discuss
 Route::get('/discussion/p/{slug}', [DiscussionController::class, 'show'])->name('discussion.show');
 Route::get('/discussion/category/{slug}', [DiscussionController::class, 'byCategory'])->name('discussion.category');
 
+// profile
+Route::get('/profile/{username}', [ProfileController::class, 'index'])->name('profile.index');
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // discussions
     Route::resource('discussion', DiscussionController::class)->only(['create','store','edit','update','destroy']);

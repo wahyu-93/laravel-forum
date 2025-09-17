@@ -129,6 +129,14 @@ a {
     object-fit: cover;
 }
 
+.avatar-profile {
+    width: 120px;   /* tentukan ukuran lingkaran */
+    height: 120px;
+    border-radius: 50%; /* bikin lingkaran */
+    object-fit: cover;  /* isi penuh tanpa ketarik */
+}
+
+
 .fs-12px {
     font-size: 12px;
 }

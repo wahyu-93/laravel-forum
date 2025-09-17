@@ -92,9 +92,9 @@
 
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
-                                            <a href="">
+                                            <a href="{{ route('profile.index', $discussion->user->username) }}">
                                                 @if($discussion->user->image)
-                                                    <img src="{{ storage($discussion->user->image) }}" class="avatar rounded-circle">
+                                                    <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
                                                 @else
                                                     <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
                                                 @endif
@@ -102,7 +102,7 @@
                                         </div>
 
                                         <span class="fs-12px d-flex flex-column">
-                                            <a href="" class="me-1 fw-bold">{{ $discussion->user->name }}</a>
+                                            <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1 fw-bold">{{ $discussion->user->name }}</a>
                                             <span class="color-gray">
                                                 {{ $discussion->created_at->diffForHumans() }}
                                             </span>
@@ -171,9 +171,9 @@
 
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
-                                                <a href="">
+                                                <a href="{{ route('profile.index', $answer->user->username) }}">
                                                     @if($answer->user->image)
-                                                        <img src="{{ storage($answer->user->image) }}" class="avatar rounded-circle">
+                                                        <img src="{{ storage_path($answer->user->image) }}" class="avatar rounded-circle">
                                                     @else
                                                         <img src="https://ui-avatars.com/api/?name={{ $answer->user->name }}" class="avatar rounded-circle">
                                                     @endif
@@ -181,7 +181,7 @@
                                             </div>
 
                                             <span class="fs-12px d-flex flex-column">
-                                                <a href="" class="me-1 fw-bold">{{ $answer->user->name }} 
+                                                <a href="{{ route('profile.index', $answer->user->username) }}" class="me-1 fw-bold">{{ $answer->user->name }} 
                                                     @if ($answer->user->id === $discussion->user_id)
                                                         <span class="fw-normal fst-italic">. Pembuat</span>
                                                     @endif

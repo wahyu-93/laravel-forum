@@ -11,8 +11,14 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar-wrapper d-flex align-items-center">
                                 <a href="" class="me-1">
-                                    <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                                    @if($user->image)
+                                        <img src="{{ storage_path($user->image) }}" class="avatar-profile rounded-circle">
+                                    @else
+                                        <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle">
+                                    @endif
                                 </a>
+
+                                
                             </div>
 
                             <div class="ms-2">
@@ -37,189 +43,98 @@
                     <div class="mb-3">
                         <h2 class="fw-bold">My Discussions</h2>
 
-                        {{-- post 1 --}}
-                        <div class="card card-discussions">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        7 likes
-                                    </div>
-
-                                    <div class="text-nowrap color-gray">
-                                        9 Answers
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-10">
-                                    <a href="">
-                                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, itaque!</h4>
-                                    </a>
-                                
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem consequatur, explicabo maxime excepturi dolorum fugit? Minus impedit consectetur distinctio hic!</p>
-                                    
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="me-1 me-lg-2">
-                                            <a href="#">
-                                                <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                            </a>
+                        @forelse ($discussions as $discussion)
+                            <div class="card card-discussions">
+                                <div class="row">
+                                    <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
+                                        <div class="text-nowrap me-2 me-lg-0">
+                                            {{ $discussion->likeCount . ' ' . Str::plural('Like', $discussion->likeCount) }} 
                                         </div>
 
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-sm-wrapper d-flex align-items-center">
-                                                <a href="" class="me-1">
-                                                    <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                                        <div class="text-nowrap color-gray">
+                                            {{ $discussion->answers->count() . ' ' . Str::plural('Answer', $discussion->answers->count()) }} 
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-10">
+                                        <a href="{{ route('discussion.show', $discussion->slug) }}">
+                                            <h4>{{ $discussion->title }}</h4>
+                                        </a>
+                                    
+                                        <p>
+                                             {!! $discussion->content_preview !!}
+                                        </p>
+                                        
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-1 me-lg-2">
+                                                <a href="{{ route('discussion.category', $discussion->category->slug) }}">
+                                                    <span class="badge rounded-fill text-bg-light">{{ $discussion->category->name }}</span>
                                                 </a>
                                             </div>
 
-                                            <span class="fs-12px">
-                                                <a href="" class="me-1 fw-bold">Wahyu</a>
-                                                <span class="color-gray">
-                                                    10 Hours Ago
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm-wrapper d-flex align-items-center">
+                                                    <a href="{{ route('profile.index', auth()->user()->username) }}" class="me-1">
+                                                        @if($discussion->user->image)
+                                                            <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
+                                                        @else
+                                                            <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
+                                                        @endif
+                                                    </a>
+                                                </div>
+
+                                                <span class="fs-12px">
+                                                    <a href="{{ route('profile.index', auth()->user()->username) }}" class="me-1 fw-bold">{{ $discussion->user->username }}</a>
+                                                    <span class="color-gray">
+                                                        {{ $discussion->created_at->diffForHumans() }}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {{-- post 2 --}}
-                        <div class="card card-discussions">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        7 likes
-                                    </div>
-
-                                    <div class="text-nowrap color-gray">
-                                        9 Answers
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-10">
-                                    <a href="">
-                                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, itaque!</h4>
-                                    </a>
-                                
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem consequatur, explicabo maxime excepturi dolorum fugit? Minus impedit consectetur distinctio hic!</p>
-                                    
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="me-1 me-lg-2">
-                                            <a href="#">
-                                                <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                            </a>
-                                        </div>
-
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-sm-wrapper d-flex align-items-center">
-                                                <a href="" class="me-1">
-                                                    <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                                </a>
-                                            </div>
-
-                                            <span class="fs-12px">
-                                                <a href="" class="me-1 fw-bold">Wahyu</a>
-                                                <span class="color-gray">
-                                                    10 Hours Ago
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                        @empty
+                            <div class="card card-discussions">
+                                Currently, there is no discussions yet 
                             </div>
-                        </div>
+                        @endforelse
 
-                        {{-- post 3 --}}
-                        <div class="card card-discussions">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        7 likes
-                                    </div>
+                        {{ $discussions->appends(request()->except('discussions_page'))->links() }}
 
-                                    <div class="text-nowrap color-gray">
-                                        9 Answers
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-10">
-                                    <a href="">
-                                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, itaque!</h4>
-                                    </a>
-                                
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem consequatur, explicabo maxime excepturi dolorum fugit? Minus impedit consectetur distinctio hic!</p>
-                                    
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="me-1 me-lg-2">
-                                            <a href="#">
-                                                <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                            </a>
-                                        </div>
-
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-sm-wrapper d-flex align-items-center">
-                                                <a href="" class="me-1">
-                                                    <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                                </a>
-                                            </div>
-
-                                            <span class="fs-12px">
-                                                <a href="" class="me-1 fw-bold">Wahyu</a>
-                                                <span class="color-gray">
-                                                    10 Hours Ago
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div>
                         <h2>My Answers</h2>
 
-                        {{-- answer 1 --}}
-                        <div class="card card-discussions">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        7 likes
+                        @forelse ($answers as $answer)
+                            <div class="card card-discussions">
+                                <div class="row">
+                                    <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
+                                        <div class="text-nowrap me-2 me-lg-0">
+                                            {{ $answer->likeCount . ' ' . Str::plural('Like', $answer->likeCount) }} 
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-10">
+                                        <span>Replied to</span>
+
+                                        <span class="fw-bold text-primary">
+                                            <a href="{{ route('discussion.show', $answer->discussion->slug) }}">
+                                                {{ $answer->discussion->title  }}
+                                            </a>    
+                                        </span> 
                                     </div>
                                 </div>
-
-                                <div class="col-12 col-lg-10">
-                                    <span>Replied to</span>
-
-                                    <span class="fw-bold text-primary">
-                                        <a href="">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, itaque!
-                                        </a>    
-                                    </span> 
-                                </div>
                             </div>
-                        </div>
-
-                        {{-- answer 2 --}}
-                        <div class="card card-discussions">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        8 likes
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-10">
-                                    <span>Replied to</span>
-
-                                    <span class="fw-bold text-primary">
-                                        <a href="">
-                                            Lorem ipsum dolor sit amet.
-                                        </a>    
-                                    </span> 
-                                </div>
+                        @empty
+                            <div class="card card-discussions">
+                                Currently, there is no answers yet 
                             </div>
-                        </div>
+                        @endforelse
+
+                        {{ $answers->appends(request()->except('answers_page'))->links() }}
+                        
                     </div>
                 </div>
             </div>
