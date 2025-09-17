@@ -22,8 +22,8 @@
                             </div>
 
                             <div class="ms-2">
-                                <h5 href="" class="me-1 fw-bold">Wahyu</h5>
-                                <p class="color-gray">Member since 1 Year Ago</p>
+                                <h5 href="" class="me-1 fw-bold">{{ $user->name }}</h5>
+                                <p class="color-gray">Member since {{ $user->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
 
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar-sm-wrapper d-flex align-items-center">
-                                                    <a href="{{ route('profile.index', auth()->user()->username) }}" class="me-1">
+                                                    <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1">
                                                         @if($discussion->user->image)
                                                             <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
                                                         @else
@@ -84,7 +84,7 @@
                                                 </div>
 
                                                 <span class="fs-12px">
-                                                    <a href="{{ route('profile.index', auth()->user()->username) }}" class="me-1 fw-bold">{{ $discussion->user->username }}</a>
+                                                    <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1 fw-bold">{{ $discussion->user->username }}</a>
                                                     <span class="color-gray">
                                                         {{ $discussion->created_at->diffForHumans() }}
                                                     </span>
