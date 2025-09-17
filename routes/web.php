@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
     // answer
     Route::post('/discussion/{discussion}/answer', [AnswerController::class, 'store'])->name('discussion.answer');
 
+    Route::resource('answer', AnswerController::class)->only(['edit','update','destroy']);
+
     // like answer
     Route::post('/answer/{answer}/like', [LikeController::class, 'answerLike'])->name('answer.like');
     Route::post('/answer/{answer}/unlike', [LikeController::class, 'answerUnLike'])->name('answer.unlike');

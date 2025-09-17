@@ -9,7 +9,7 @@
                 <div class="d-flex align-items-center">
                     <div class="d-flex">
                         <div class="fs-2 fw-bold me-2 mb-0">
-                            Answer a Question
+                            Edit Answer
                         </div>
                     </div>
                 </div>
@@ -20,15 +20,24 @@
                     <div class="card card-discussions mb-5">
                         <div class="row">
                             <div class="col-12">
-                                <form action="" method="post">
+                                <form action="{{ route('answer.update', $answer) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+
                                     <div class="form-group mb-3">
-                                        <label for="content" class="form-label">Content</label>
-                                        <textarea name="content" id="content" class="form-control" cols="30" rows="10"></textarea>
+                                        <label for="answer" class="form-label">Answer</label>
+                                        
+                                        <textarea name="answer" id="answer" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10">{!! $answer->answer !!}</textarea>
+                                        @error('answer')
+                                           <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    
+
                                     <div>
-                                        <button type="submit" class="btn btn-primary">Create Answer</button>
-                                        <a href="" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">Update Answer</button>
+                                        <a href="{{ route('discussion.show', $answer->discussion->slug) }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
                             </div>
@@ -43,7 +52,7 @@
 @push('after-script')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
     <script>
-        $('#content').summernote({
+        $('#answer').summernote({
             placeholder: 'Your Solution',
             tabsize: 2,
             height: 320,
