@@ -37,7 +37,7 @@
 
                         @auth
                             @if(auth()->user()->username === $user->username)
-                                <a href="" class="btn btn-secondary">Edit Profile</a>
+                                <a href="{{ route('profile.edit', $user->username) }}" class="btn btn-secondary">Edit Profile</a>
                             @endif
                         @endauth
                     </div>

@@ -7,16 +7,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <form action="" method="POST">
+                    <form action="{{ route('profile.update', $user->id) }}" method="POST">
+                        @csrf
+                        @method('patch')
+
+
                         <div class="d-flex flex-column flex-md-row mb-4">
                             <div class="edit-avatar-wrapper mb-3 mb-md-0 mx-auto mx-md-0">
                                 <div class="avatar-wrapper d-flex align-items-center">
                                     <a href="" class="me-1">
-                                        <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle" id="avatar">
+                                        @if($user->image)
+                                            <img src="{{ storage_path($user->image) }}" class="avatar-profile rounded-circle" id="avatar">
+                                        @else
+                                            <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle" id="avatar">
+                                        @endif
                                     </a>
                                 </div>
 
-                                <label for="picture" class="btn p-0 edit-avatar-show">
+                                <label for="picture" class="btn p-0 edit-avatar-show" title="Change Image Profile">
                                     <img src="{{ url('assets/images/edit-circle.png') }}" alt="edit">
                                 </label>
                                 <input type="file" name="picture" id="picture" class="d-none" accept="image/*">
@@ -25,12 +33,20 @@
                             <div class="ms-4">
                                 <div class="form-group mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" name="username" id="username" class="form-control">
+                                    
+                                    <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ $user->username }}">
+                                    @error('username')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="pasword" name="password" id="password" class="form-control">
+
+                                    <input type="pasword" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                     <span class="color-gray fst-italic">
                                         *empty this if you don't want to change password
                                     </span>
@@ -45,7 +61,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="" class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('discussion.index') }}" class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                     </form>                   

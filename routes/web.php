@@ -21,11 +21,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
-Route::get('/profile/{id}/edit', function () {
-    return view('pages.profile.edit');
-})->name('profile.edit');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -57,6 +52,10 @@ Route::middleware('auth')->group(function () {
     // like answer
     Route::post('/answer/{answer}/like', [LikeController::class, 'answerLike'])->name('answer.like');
     Route::post('/answer/{answer}/unlike', [LikeController::class, 'answerUnLike'])->name('answer.unlike');
+
+    // profile
+    Route::get('/profile/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/{username}/edit', [ProfileController::class, 'update'])->name('profile.update');
 
 });
 
