@@ -11,10 +11,14 @@
                         <div class="d-flex align-items-center">
                             <div class="avatar-wrapper d-flex align-items-center">
                                 @if($user->image)
-                                    <img src="{{ Storage::url($user->image) }}" class="avatar-profile rounded-circle">
+                                    <a href="{{ Storage::url($user->image) }}" 
+                                        data-lightbox="preview" 
+                                        data-title="{{ $user->username }}">
+                                                <img src="{{ Storage::url($user->image) }}" class="avatar-profile rounded-circle">
+                                    </a>
                                 @else
                                     <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle">
-                                @endif                                
+                                @endif 
                             </div>
 
                             <div class="ms-2">
@@ -25,11 +29,11 @@
                     </div>
 
                     <div class="mt-3">
-                        <a href="javascript:;" id="share-discussion" class="btn btn-primary">
+                        <a href="javascript:;" id="share-profile" class="btn btn-primary">
                             Share
                         </a>
 
-                        <input type="text" id="current-url" value="" class="d-none">
+                        <input type="text" id="current-url" value="{{ route('profile.index', $user->username) }}" class="d-none">
 
                         @auth
                             @if(auth()->user()->username === $user->username)
@@ -143,9 +147,10 @@
 @endsection
 
 @push('after-script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('#share-discussion').click(function(){
+            $('#share-profile').click(function(){
                 var copyText = $('#current-url');
 
                 // sorot semua teks dalam inputan
