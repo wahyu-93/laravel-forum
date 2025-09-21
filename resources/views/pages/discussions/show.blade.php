@@ -90,13 +90,13 @@
                                         </div>
                                     </div>                                    
 
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center">
                                         <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
                                             <a href="{{ route('profile.index', $discussion->user->username) }}">
                                                 @if($discussion->user->image)
-                                                    <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
+                                                    <img src="{{ Storage::url($discussion->user->image) }}" class="avatar-discussion rounded-circle">
                                                 @else
-                                                    <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
+                                                    <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar-discussion rounded-circle">
                                                 @endif
                                             </a>
                                         </div>
@@ -169,13 +169,13 @@
                                             </div>
                                         </div>                                    
 
-                                        <div class="d-flex align-items-center gap-2">
+                                        <div class="d-flex align-items-center">
                                             <div class="card-discussions-show-avatar-wrapper flex-shrink-0 rounded-circle overflw-hidden">
                                                 <a href="{{ route('profile.index', $answer->user->username) }}">
                                                     @if($answer->user->image)
-                                                        <img src="{{ storage_path($answer->user->image) }}" class="avatar rounded-circle">
+                                                        <img src="{{ Storage::url($answer->user->image) }}" class="avatar-discussion rounded-circle">
                                                     @else
-                                                        <img src="https://ui-avatars.com/api/?name={{ $answer->user->name }}" class="avatar rounded-circle">
+                                                        <img src="https://ui-avatars.com/api/?name={{ $answer->user->name }}" class="avatar-discussion rounded-circle">
                                                     @endif
                                                 </a>
                                             </div>

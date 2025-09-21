@@ -10,15 +10,11 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <div class="avatar-wrapper d-flex align-items-center">
-                                <a href="" class="me-1">
-                                    @if($user->image)
-                                        <img src="{{ storage_path($user->image) }}" class="avatar-profile rounded-circle">
-                                    @else
-                                        <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle">
-                                    @endif
-                                </a>
-
-                                
+                                @if($user->image)
+                                    <img src="{{ Storage::url($user->image) }}" class="avatar-profile rounded-circle">
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle">
+                                @endif                                
                             </div>
 
                             <div class="ms-2">
@@ -76,13 +72,13 @@
                                                 </a>
                                             </div>
 
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center gap-1">
                                                 <div class="avatar-sm-wrapper d-flex align-items-center">
-                                                    <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1">
+                                                    <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1 gap-1">
                                                         @if($discussion->user->image)
-                                                            <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
+                                                            <img src="{{ Storage::url($discussion->user->image) }}" class="avatar-discussion rounded-circle">
                                                         @else
-                                                            <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
+                                                            <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar-discussion rounded-circle">
                                                         @endif
                                                     </a>
                                                 </div>

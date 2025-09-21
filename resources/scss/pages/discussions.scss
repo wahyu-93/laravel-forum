@@ -17,3 +17,11 @@
         color: $blue-600;
     }
 }
+
+.avatar-discussion {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;   /* bulat sempurna */
+    object-fit: cover;    /* crop sesuai rasio */
+    object-position: center;
+}

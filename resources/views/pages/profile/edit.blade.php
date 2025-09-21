@@ -7,17 +7,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <form action="{{ route('profile.update', $user->id) }}" method="POST">
+                    <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
-
 
                         <div class="d-flex flex-column flex-md-row mb-4">
                             <div class="edit-avatar-wrapper mb-3 mb-md-0 mx-auto mx-md-0">
                                 <div class="avatar-wrapper d-flex align-items-center">
                                     <a href="" class="me-1">
                                         @if($user->image)
-                                            <img src="{{ storage_path($user->image) }}" class="avatar-profile rounded-circle" id="avatar">
+                                            <img src="{{ Storage::url($user->image) }}" class="avatar-profile rounded-circle" id="avatar">
                                         @else
                                             <img src="https://ui-avatars.com/api/?name={{ $user->name }}" class="avatar-profile rounded-circle" id="avatar">
                                         @endif
@@ -43,7 +42,7 @@
                                 <div class="form-group mb-3">
                                     <label for="password" class="form-label">Password</label>
 
-                                    <input type="pasword" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -54,7 +53,7 @@
 
                                 <div class="form-group mb-3">
                                     <label for="password" class="form-label">Confirm Password</label>
-                                    <input type="pasword" name="confirmPassword" id="confirmPassword" class="form-control">
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                                     <span class="color-gray fst-italic">
                                         *empty this if you don't want to change password
                                     </span>

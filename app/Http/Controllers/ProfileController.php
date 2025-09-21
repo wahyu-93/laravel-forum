@@ -9,7 +9,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -61,5 +63,27 @@ class ProfileController extends Controller
             abort(500);
         };
 
+        // Update username
+        $updateUser->username = $request->username;
+
+        // Update password hanya kalau diisi
+        if ($request->filled('password')) {
+            $updateUser->password = Hash::make($request->password);
+        }
+
+        // update image
+        if($request->hasFile('picture')){
+            $image = $request->file('picture');
+
+            $fileName = $request->username . '_' . time(). '.' .$image->getClientOriginalExtension();
+
+            $saveImage = $image->storeAs('users', $fileName, 'public');
+
+            $updateUser->image = $saveImage;
+        };
+  
+        $updateUser->save();
+
+        return redirect()->route('profile.edit', $updateUser->username);
     }
 }

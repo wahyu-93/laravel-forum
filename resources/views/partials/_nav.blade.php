@@ -44,7 +44,7 @@
                         <a class="nav-link p-0 d-flex align-items-center" href="javascript:;" data-bs-toggle="dropdown">
                             <div class="avatar-nav-wrapper me-2">
                                 @if(auth()->user()->image)
-                                    <img src="{{ storage_path(auth()->user()->image) }}" class="avatar rounded-circle">
+                                    <img src="{{ Storage::url(auth()->user()->image) }}" class="avatar rounded-circle">
                                 @else
                                     <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="avatar rounded-circle">
                                 @endif

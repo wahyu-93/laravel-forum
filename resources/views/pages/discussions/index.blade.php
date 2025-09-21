@@ -56,13 +56,13 @@
                                             </a>
                                         </div>
 
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center gap-1">
                                             <div class="avatar-sm-wrapper d-flex align-items-center">
                                                 <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1">
                                                     @if($discussion->user->image)
-                                                        <img src="{{ storage_path($discussion->user->image) }}" class="avatar rounded-circle">
+                                                        <img src="{{  Storage::url($discussion->user->image) }}" class="avatar-discussion rounded-circle">
                                                     @else
-                                                        <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
+                                                        <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar-discussion rounded-circle">
                                                     @endif
                                                 </a>
                                             </div>
