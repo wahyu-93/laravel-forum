@@ -73,6 +73,9 @@ class ProfileController extends Controller
 
         // update image
         if($request->hasFile('picture')){
+            // jika foto sebelumnya ada maka dihapus
+            Storage::delete('public/' . $user->image);
+
             $image = $request->file('picture');
 
             $fileName = $request->username . '_' . time(). '.' .$image->getClientOriginalExtension();
