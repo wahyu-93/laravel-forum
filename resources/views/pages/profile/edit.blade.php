@@ -60,7 +60,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('discussion.index') }}" class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('profile.index', $user->username) }}" class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                     </form>                   

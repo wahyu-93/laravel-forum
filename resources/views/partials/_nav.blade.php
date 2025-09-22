@@ -14,11 +14,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active fw-bold" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{ request()->is('/') ? 'active fw-bold' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('discussion.index') }}">Discussions</a>
+                    <a class="nav-link {{ request()->is('discussion*') ? 'active fw-bold' : '' }}" href="{{ route('discussion.index') }}">Discussions</a>
                 </li>
                 
                 <li class="nav-item">
