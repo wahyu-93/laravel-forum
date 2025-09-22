@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
@@ -20,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/discussion', [DiscussionController::class, 'index'])->name('discussion.index');
 Route::get('/discussion/p/{slug}', [DiscussionController::class, 'show'])->name('discussion.show');
@@ -56,6 +53,10 @@ Route::middleware('auth')->group(function () {
     // profile
     Route::get('/profile/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{username}/edit', [ProfileController::class, 'update'])->name('profile.update');
+
+    // routenya status admin
+
+    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.index');
 
 });
 
