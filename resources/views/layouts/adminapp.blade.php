@@ -83,12 +83,12 @@
   </head>
   <body>
     {{-- header --}}
-    @include('admin.partial.layout._header')
+    @include('admin.partial._header')
 
     <div class="container-fluid">
         <div class="row">
             {{-- sidebar --}}
-            @include('admin.partial.layout._sidebar')
+            @include('admin.partial._sidebar')
 
             {{-- content --}}
             @yield('content')

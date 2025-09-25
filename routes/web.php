@@ -55,8 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/{username}/edit', [ProfileController::class, 'update'])->name('profile.update');
 
     // routenya status admin
-
-    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.index');
+    Route::prefix('admin')->group(function() {
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.index');
+    });
 
 });
 
