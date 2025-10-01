@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DiscussionController;
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
     // routenya status admin
     Route::prefix('admin')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.index');
+        Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
     });
 
 });

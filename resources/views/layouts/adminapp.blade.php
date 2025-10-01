@@ -89,7 +89,7 @@
         <div class="row">
             {{-- sidebar --}}
             @include('admin.partial._sidebar')
-
+          
             {{-- content --}}
             @yield('content')
         </div>
