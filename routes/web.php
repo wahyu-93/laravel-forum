@@ -56,9 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/{username}/edit', [ProfileController::class, 'update'])->name('profile.update');
 
     // routenya status admin
-    Route::prefix('admin')->group(function() {
-        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.index');
-        Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::prefix('admin')->as('admin.')->group(function() {
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('index');
+
+        Route::resource('/categories', CategoryController::class)->except(['show', 'create', 'edit']);
     });
 
 });

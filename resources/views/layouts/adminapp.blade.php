@@ -81,6 +81,7 @@
     @stack('css')
 
   </head>
+
   <body>
     {{-- header --}}
     @include('admin.partial._header')
