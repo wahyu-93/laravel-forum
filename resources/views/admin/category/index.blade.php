@@ -61,6 +61,7 @@
     </main>
 
     @include('admin.category._create')
+    @include('admin.category._edit')
     @include('admin.category._delete')
 
 @endsection
