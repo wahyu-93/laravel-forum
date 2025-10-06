@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/categories', CategoryController::class)->except(['show', 'create', 'edit']);
 
         Route::get('post', [PostController::class, 'index'])->name('post.index');
+        Route::delete('post/destroy/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+        Route::match(['put', 'patch'], 'post/publish-unpublish/{post}', [PostController::class, 'publishUnpublish'])->name('post.publish.unpublish');
     });
 
 });

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('content_preview');
             $table->text('content');
             $table->enum('status',['create','updated']);
-            $table->boolean('published')->default(0);
+            $table->boolean('published')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

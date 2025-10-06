@@ -63,11 +63,16 @@
                             </td>
                             <td class="text-center">
                                 <div class="d-flex gap-1">
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}" title="unpublish">
-                                        {{-- <i class="bi bi-send"></i> --}}
-                                        <i class="bi-file-earmark-text"></i>
-                                    </button>
-    
+                                    @if($post->published)
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $post->id }}" title="unpublish">
+                                            <i class="bi-file-earmark-text"></i>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $post->id }}" title="published">
+                                            <i class="bi bi-send"></i>
+                                        </button>
+                                    @endif
+
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}" title="delete">
                                         <i class="bi bi-trash"></i>
                                     </button>
@@ -81,6 +86,7 @@
     </main>
 
     @include('admin.post._delete')
+    @include('admin.post._published')
 @endsection
 
 @push('js')

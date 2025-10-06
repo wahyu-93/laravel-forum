@@ -12,7 +12,12 @@ class Discussion extends Model
 {
     use HasFactory, SoftDeletes, Likeable;
 
-    protected $fillable = ['user_id','category_id','title','content_preview','content'];
+    protected $fillable = ['user_id','category_id','title','content_preview','content','published'];
+
+    // gunanya supaya tampilannya di blade jadi true/false bukan 1/0
+    protected $casts = [
+        'published'  => 'boolean',
+    ];
 
     public static function boot()
     {
