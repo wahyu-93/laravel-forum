@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
@@ -60,6 +61,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('index');
 
         Route::resource('/categories', CategoryController::class)->except(['show', 'create', 'edit']);
+
+        Route::get('post', [PostController::class, 'index'])->name('post.index');
     });
 
 });

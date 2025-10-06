@@ -1,6 +1,6 @@
 @extends('layouts.adminApp')
 
-@section('title', 'Category')
+@section('title', 'Discussion')
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.bootstrap5.css">
@@ -9,7 +9,7 @@
 @section('content')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>List Categories</h2>
+            <h2>List Discussions</h2>
         </div>
 
         @if (session('success'))
@@ -27,31 +27,43 @@
                 </ul>
             </div>
         @endif
-
-        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate">Tambah Category</button>
-        
+  
         <div class="mt-3">
             <table class="table table-bordered table-striped" id="dataTable">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Slug</th>
+                        <th>Title</th>
+                        <th>Content Preview</th>
                         <th>Created At</th>
+                        <th>User</th>
+                        <th>Comments</th>
+                        <th>Likes</th>
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($posts as $post)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $category->name }}</td>
-                            <td>{{ $category->slug }}</td>
-                            <td>{{ $category->created_at }}</td>
+                            <td>
+                                {{ $post->title }}
+
+                                <span class="badge bg-primary">{{ $post->category->name }}</span>
+                            </td>
+                            <td>{!! $post->content_preview !!}</td>
+                            <td>{{ $post->created_at }}</td>
+                            <td>{{ $post->user->name }} ({{ $post->user->username }})</td>
+                            <td>
+                                <span class="badge bg-info">{{ $post->answers->count() }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ $post->likeCount }}</span>
+                            </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $category->id }}">Edit</button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $category->id }}">Hapus</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}">Published</button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}">Delete</button>
                             </td>
                         </tr>
                     @endforeach
@@ -60,10 +72,7 @@
         </div>
     </main>
 
-    @include('admin.category._create')
-    @include('admin.category._edit')
-    @include('admin.category._delete')
-
+    @include('admin.post._delete')
 @endsection
 
 @push('js')

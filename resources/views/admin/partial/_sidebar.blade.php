@@ -8,15 +8,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Categories
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link {{ Request::is('admin/post*') ? 'active' : '' }}" href="{{ route('admin.post.index') }}">
                     <span data-feather="file" class="align-text-bottom"></span>
-                    Articles
+                    Discussions
                 </a>
             </li>
             <li class="nav-item">
