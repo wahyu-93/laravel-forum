@@ -50,8 +50,13 @@
                             <td>{{ $category->slug }}</td>
                             <td>{{ $category->created_at }}</td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $category->id }}">Edit</button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $category->id }}">Hapus</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $category->id }}">
+                                    <span class="bi bi-pencil"></span>
+                                </button>
+
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $category->id }}">
+                                    <span class="bi bi-trash"></span>
+                                </button>
                             </td>
                         </tr>
                     @endforeach

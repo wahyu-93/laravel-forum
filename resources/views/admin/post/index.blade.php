@@ -55,15 +55,23 @@
                             <td>{!! $post->content_preview !!}</td>
                             <td>{{ $post->created_at }}</td>
                             <td>{{ $post->user->name }} ({{ $post->user->username }})</td>
-                            <td>
+                            <td class="text-center">
                                 <span class="badge bg-info">{{ $post->answers->count() }}</span>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <span class="badge bg-info">{{ $post->likeCount }}</span>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}">Published</button>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}">Delete</button>
+                                <div class="d-flex gap-1">
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}" title="unpublish">
+                                        {{-- <i class="bi bi-send"></i> --}}
+                                        <i class="bi-file-earmark-text"></i>
+                                    </button>
+    
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $post->id }}" title="delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
