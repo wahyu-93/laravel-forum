@@ -44,9 +44,17 @@
 
                 <tbody>
                     @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
+                                {{ $user->name }}
+
+                                @if($user->actived)
+                                    <span class="badge bg-primary">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Suspend</span>
+                                @endif
+                            </td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -82,7 +90,7 @@
     </main>
 
     @include('admin.user._delete')
-    @include('admin.user._published')
+    @include('admin.user._suspend')
 @endsection
 
 @push('js')

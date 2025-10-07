@@ -14,4 +14,16 @@ class UserController extends Controller
 
         return view('admin.user.index', compact('users'));
     }
+
+    public function suspend($id)
+    {
+
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return back()->with('success', 'User Berhasil Dihapus');
+    }
 }

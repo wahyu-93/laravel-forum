@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::match(['put', 'patch'], 'post/publish-unpublish/{post}', [PostController::class, 'publishUnpublish'])->name('post.publish.unpublish');
 
         Route::get('users', [UserController::class, 'index'])->name('user.index');
+        Route::delete('users/{user}', [UserController::class, 'destroy'])->name('user.destroy'); 
     });
 
 });

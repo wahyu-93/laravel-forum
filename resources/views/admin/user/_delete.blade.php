@@ -8,11 +8,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.post.destroy', $user->id) }}" method="POST">
+                    <form action="{{ route('admin.user.destroy', $user) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         
-                        <p> Apakah Yakin Postingan <strong>{{ $user->name }}</strong> Akan dihapus ? </p>
+                        <p> Apakah Yakin User <strong>{{ $user->name }}</strong> Akan dihapus ? </p>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger">Delete</button>
