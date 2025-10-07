@@ -38,6 +38,11 @@ class Discussion extends Model
         return 'slug';
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('published', true);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

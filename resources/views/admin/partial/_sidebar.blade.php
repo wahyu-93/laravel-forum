@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
                     <span data-feather="users" class="align-text-bottom"></span>
                     Users
                 </a>

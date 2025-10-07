@@ -21,11 +21,12 @@ class DiscussionController extends Controller
         if($request->search){
             $discussions = Discussion::with(['user', 'category', 'answers'])
                             ->where('title', 'like', '%'.$request->search.'%')
+                            ->published()
                             ->orderBy('created_at', 'DESC')
                             ->paginate(10)->withQueryString(); //withQueryString berfungsi untuk membawa nilai search ke halaman berikutnya
         }
         else {
-            $discussions = Discussion::with(['user', 'category', 'answers'])->orderBy('created_at','DESC')->paginate(10);
+            $discussions = Discussion::with(['user', 'category', 'answers'])->published()->orderBy('created_at','DESC')->paginate(10);
         }
         
         return view('pages.discussions.index', compact('discussions', 'categories', 'search'));
@@ -102,6 +103,7 @@ class DiscussionController extends Controller
                         ->whereHas('category', function($query) use ($slug){
                             $query->where('slug', $slug);
                         })
+                        ->published()
                         ->orderBy('created_at','DESC')
                         ->paginate(10)
                         ->withQueryString();

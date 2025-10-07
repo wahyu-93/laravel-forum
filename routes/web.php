@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
@@ -65,6 +66,8 @@ Route::middleware('auth')->group(function () {
         Route::get('post', [PostController::class, 'index'])->name('post.index');
         Route::delete('post/destroy/{post}', [PostController::class, 'destroy'])->name('post.destroy');
         Route::match(['put', 'patch'], 'post/publish-unpublish/{post}', [PostController::class, 'publishUnpublish'])->name('post.publish.unpublish');
+
+        Route::get('users', [UserController::class, 'index'])->name('user.index');
     });
 
 });
