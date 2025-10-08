@@ -4,18 +4,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $user->published ? 'Unpublish' : 'Publish' }} Discussion</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $user->actived ? 'Suspend' : 'Active' }} User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.post.publish.unpublish', $user->id) }}" method="POST">
+                    <form action="{{ route('admin.user.active.suspend', $user) }}" method="POST">
                         @method('PUT')
                         @csrf
                         
-                        <p> Apakah Yakin Postingan <strong>{{ $user->title }}</strong> Akan di {{ $user->published ? 'Unpublish' : 'Publish' }} ? </p>
+                        <p> Apakah Yakin User <strong>{{ $user->name }}</strong> Akan di {{ $user->actived ? 'Suspend' : 'Active kan' }} ? </p>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">{{ $user->published ? 'Unpublish' : 'Publish' }}</button>
+                            <button type="submit" class="btn btn-primary">{{ $user->actived ? 'Suspend' : 'Active' }}</button>
                         </div>
                     </form>
                 </div>

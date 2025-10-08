@@ -67,13 +67,13 @@
                             <td>{{ $user->created_at }}</td>
                             <td class="text-center">
                                 <div class="d-flex gap-1">
-                                    @if($user->published)
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $user->id }}" title="unpublish">
-                                            <i class="bi-file-earmark-text"></i>
+                                    @if($user->actived)
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $user->id }}" title="suspend">
+                                            <i class="bi bi-pause"></i>
                                         </button>
                                     @else
-                                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $user->id }}" title="published">
-                                            <i class="bi bi-send"></i>
+                                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#modalPublish{{ $user->id }}" title="active kan">
+                                            <i class="bi bi-play"></i>
                                         </button>
                                     @endif
 

@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('users', [UserController::class, 'index'])->name('user.index');
         Route::delete('users/{user}', [UserController::class, 'destroy'])->name('user.destroy'); 
+        Route::match(['put', 'patch'], 'user/active-suspend/{user}', [UserController::class, 'activeSuspend'])->name('user.active.suspend');
     });
 
 });

@@ -15,9 +15,16 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    public function suspend($id)
+    public function activeSuspend(User $user)
     {
+        $user->update([
+            'actived' => !$user->actived
+        ]);
 
+        $user->fresh();
+
+        $status = $user->actived ? 'Active kan' : 'Suspend';
+        return back()->with('success', 'User Berhasil di ' . $status); 
     }
 
     public function destroy(User $user)
