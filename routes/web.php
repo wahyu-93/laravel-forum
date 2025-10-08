@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 
     // routenya status admin
     Route::prefix('admin')->as('admin.')->group(function() {
-        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('index');
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
         Route::resource('/categories', CategoryController::class)->except(['show', 'create', 'edit']);
 
