@@ -11,7 +11,7 @@
             <h2>Dashboard Admin</h2>
         </div>
 
-        <div class="d-flex flex-wrap gap-3">
+        <div class="d-flex flex-wrap gap-3 mb-3">
             <div class="card flex-fill">
                 <div class="card-body">
                     <h5 class="card-title">Users</h5>
@@ -34,6 +34,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <!-- Tabel 1 -->
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Categroy</th>
+                            <th>Total</th>
+                        </tr>
+                        
+                        @forelse ($countDiscussionsByCategory as $discussion )
+                            <tr>
+                                <td>{{ $discussion->name }}</td>
+                                <td>{{ $discussion->discussions_count }}</td>
+
+                            </tr>
+                        @empty
+                            <p>Belum Ada Data</p>
+                        @endforelse
+
+                    </table>
+                </div>   
+            </div>
+        </div>       
 
     </main>
 @endsection

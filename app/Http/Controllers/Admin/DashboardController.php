@@ -16,6 +16,16 @@ class DashboardController extends Controller
         $discussionsCount = Discussion::count();
         $categoriesCount = Category::count();
 
-        return view('admin.dashboard', compact('usersCount', 'discussionsCount', 'categoriesCount'));
+        // jumlah category dengan diskusi terbanyak
+        $countDiscussionsByCategory = Category::withCount('discussions')
+                                        ->orderBy('discussions_count', 'desc')
+                                        ->take(5)
+                                        ->get();
+
+        // jumlah diskusi denga jawaban terbanyak
+
+
+
+        return view('admin.dashboard', compact('usersCount', 'discussionsCount', 'categoriesCount', 'countDiscussionsByCategory'));
     }
 }
