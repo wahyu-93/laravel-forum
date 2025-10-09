@@ -29,19 +29,19 @@
             <div class="col-12 col-lg-4 text-center">
                 <img class="mb-2 promote-icon" src="{{ url('assets/images/discussions.png') }}" />
                 <h2 class="fw-bold">Discussions</h2>
-                <p class="fs-3">34.834</p>
+                <p class="fs-3">{{ number_format($discussionsCount) }}</p>
             </div>
 
             <div class="col-12 col-lg-4 text-center">
                 <img class="mb-2 promote-icon" src="{{ url('assets/images/reply.png') }}" />
                 <h2 class="fw-bold">Answers</h2>
-                <p class="fs-3">53.674</p>
+                <p class="fs-3">{{ number_format($AnswersCount) }}</p>
             </div>
 
             <div class="col-12 col-lg-4 text-center">
                 <img class="mb-2 promote-icon" src="{{ url('assets/images/users.png') }}" />
                 <h2 class="fw-bold">Users</h2>
-                <p class="fs-3">66.347</p>
+                <p class="fs-3">{{ number_format($usersCount) }}</p>
             </div>
         </div>
     </section>
@@ -52,120 +52,51 @@
             <h2 class="text-center mb-5">Help Others</h2>
             
             <div class="row">
-                {{-- comment 1 --}}
-                <div class="col-12 col-lg-4 mb-3">
-                    <div class="card">
-                        <a href="#">
-                            <h3>Membuat Validasi di Laravel?</h3>
-                        </a>
+                @foreach ($discussions as $discussion)
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div class="card h-100 d-flex flex-column"> <!-- penting: flex-column -->
+                            <a href="{{ route('discussion.show', $discussion->slug) }}" class="text-decoration-none text-dark">
+                                <h3 class="p-3">{{ $discussion->title }}</h3>
+                            </a>
 
-                        <div>
-                            <p class="mb-5">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
-                            </p>
+                            <div class="flex-grow-1 px-3"> <!-- isi utama fleksibel -->
+                                <p class="mb-5">
+                                    {!! $discussion->content_preview !!}
+                                </p>
+                            </div>
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="me-1 me-lg-2">
-                                    <a href="#">
-                                        <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                    </a>
-                                </div>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar-sm-wrapper d-flex align-items-center">
-                                        <a href="" class="me-1">
-                                            <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
+                            <!-- FOOTER SELALU DI BAWAH -->
+                            <div class="card-footer bg-transparent border-0 mt-auto"> <!-- mt-auto dorong ke bawah -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="me-1 me-lg-2">
+                                        <a href="{{ route('discussion.category', $discussion->category->slug) }}">
+                                            <span class="badge rounded-fill text-bg-light">{{ $discussion->category->name }}</span>
                                         </a>
                                     </div>
 
-                                    <span class="fs-12px">
-                                        <a href="" class="me-1 fw-bold">Wahyu</a>
-                                        <span class="color-gray">
-                                            10 Hours Ago
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="avatar-sm-wrapper d-flex align-items-center">
+                                            <a href="" class="me-1">
+                                                @if($discussion->user->image)
+                                                    <img src="{{ Storage::url($discussion->user->image) }}" class="avatar-discussion rounded-circle" width="24" height="24">
+                                                @else
+                                                    <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar-discussion rounded-circle" width="24" height="24">
+                                                @endif
+                                            </a>
+                                        </div>
+
+                                        <span class="fs-12px">
+                                            <a href="" class="me-1 fw-bold">{{ $discussion->user->name }}</a>
+                                            <span class="color-gray">
+                                                {{ $discussion->created_at->diffForHumans() }}
+                                            </span>
                                         </span>
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- comment 2 --}}
-                <div class="col-12 col-lg-4 mb-3">
-                    <div class="card">
-                        <a href="#">
-                            <h3>Membuat Validasi di Laravel?</h3>
-                        </a>
-
-                        <div>
-                            <p class="mb-5">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
-                            </p>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="me-1 me-lg-2">
-                                    <a href="#">
-                                        <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                    </a>
-                                </div>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar-sm-wrapper d-flex align-items-center">
-                                        <a href="" class="me-1">
-                                            <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                        </a>
-                                    </div>
-
-                                    <span class="fs-12px">
-                                        <a href="" class="me-1 fw-bold">Wahyu</a>
-                                        <span class="color-gray">
-                                            10 Hours Ago
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- comment 3 --}}
-                <div class="col-12 col-lg-4 mb-3">
-                    <div class="card">
-                        <a href="#">
-                            <h3>Membuat Validasi di Laravel?</h3>
-                        </a>
-
-                        <div>
-                            <p class="mb-5">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, reprehenderit reiciendis. Temporibus sit omnis minus ea mollitia nemo iure architecto.
-                            </p>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="me-1 me-lg-2">
-                                    <a href="#">
-                                        <span class="badge rounded-fill text-bg-light">Laravel</span>
-                                    </a>
-                                </div>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar-sm-wrapper d-flex align-items-center">
-                                        <a href="" class="me-1">
-                                            <img src="{{ url('assets/images/avatar-dummy.webp') }}" class="avatar rounded-circle">
-                                        </a>
-                                    </div>
-
-                                    <span class="fs-12px">
-                                        <a href="" class="me-1 fw-bold">Wahyu</a>
-                                        <span class="color-gray">
-                                            10 Hours Ago
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
+               @endforeach
             </div>
         </div>
     </section>

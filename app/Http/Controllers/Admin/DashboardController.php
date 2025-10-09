@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Discussion;
 use App\Models\User;
@@ -22,10 +23,12 @@ class DashboardController extends Controller
                                         ->take(5)
                                         ->get();
 
-        // jumlah diskusi denga jawaban terbanyak
+        // jumlah diskusi dengn jawaban terbanyak
+        $countDiscussionsByAnswer = Discussion::withCount('answers')
+                                        ->orderBy('answers_count', 'desc')
+                                        ->take(5)
+                                        ->get();
 
-
-
-        return view('admin.dashboard', compact('usersCount', 'discussionsCount', 'categoriesCount', 'countDiscussionsByCategory'));
+        return view('admin.dashboard', compact('usersCount', 'discussionsCount', 'categoriesCount', 'countDiscussionsByCategory', 'countDiscussionsByAnswer'));
     }
 }

@@ -60,9 +60,9 @@
                                             <div class="avatar-sm-wrapper d-flex align-items-center">
                                                 <a href="{{ route('profile.index', $discussion->user->username) }}" class="me-1">
                                                     @if($discussion->user->image)
-                                                        <img src="{{  Storage::url($discussion->user->image) }}" class="avatar-discussion rounded-circle">
+                                                        <img src="{{  Storage::url($discussion->user->image) }}" class="avatar rounded-circle">
                                                     @else
-                                                        <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar-discussion rounded-circle">
+                                                        <img src="https://ui-avatars.com/api/?name={{ $discussion->user->name }}" class="avatar rounded-circle">
                                                     @endif
                                                 </a>
                                             </div>

@@ -36,20 +36,62 @@
         </div>
 
         <div class="row">
-            <!-- Tabel 1 -->
+            {{-- table 1 --}}
             <div class="col-md-6">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
+                            <th>No</th>
                             <th>Categroy</th>
                             <th>Total</th>
                         </tr>
                         
                         @forelse ($countDiscussionsByCategory as $discussion )
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $discussion->name }}</td>
-                                <td>{{ $discussion->discussions_count }}</td>
+                                <td>
+                                    <span class="badge bg-info">
+                                        {{ $discussion->discussions_count }}
+                                    </span>
+                                </td>
 
+                            </tr>
+                        @empty
+                            <p>Belum Ada Data</p>
+                        @endforelse
+
+                    </table>
+                </div>   
+            </div>
+
+            {{-- table 2 --}}
+             <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>No</th>
+                            <th>Discussion</th>
+                            <th>Category</th>
+                            <th>Total Answer</th>
+                            <th>Total Like</th>
+                        </tr>
+                        
+                        @forelse ($countDiscussionsByAnswer as $discussionAnswer )
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $discussionAnswer->title }}</td>
+                                <td>{{ $discussionAnswer->category->name }}</td>
+                                <td>
+                                    <span class="badge bg-primary">
+                                        {{ $discussionAnswer->answers_count }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">
+                                        {{ $discussionAnswer->likeCount }}
+                                    </span>
+                                </td>
                             </tr>
                         @empty
                             <p>Belum Ada Data</p>

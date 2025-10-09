@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\DashboardController as DashboardControllerUser;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
@@ -21,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', DashboardControllerUser::class)->name('home');
 
 Route::get('/discussion', [DiscussionController::class, 'index'])->name('discussion.index');
 Route::get('/discussion/p/{slug}', [DiscussionController::class, 'show'])->name('discussion.show');
