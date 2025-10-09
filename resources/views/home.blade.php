@@ -74,7 +74,7 @@
                                         </a>
                                     </div>
 
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center gap-1">
                                         <div class="avatar-sm-wrapper d-flex align-items-center">
                                             <a href="" class="me-1">
                                                 @if($discussion->user->image)
